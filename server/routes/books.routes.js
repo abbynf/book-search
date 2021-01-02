@@ -16,10 +16,12 @@ router
 router
     .route('/:id')
     .delete((req, res) => {
+        // Delte book from the database
         console.log("delete route hit");
         const reqDel =  req.params.id
         console.log("params", reqDel);
         res.json({ success: true})
     })
+// * route
 
 module.exports = router;
