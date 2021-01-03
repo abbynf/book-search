@@ -6,7 +6,13 @@ router
     .get((req, res) => {
         // return all saved books as JSON
         console.log('hit the get route in /api/books');
-        res.json({ success: true})
+        Book
+            .find({})
+            .then(data => {
+                console.log("TODO GET RECEIVED");
+                console.log({ data });
+                res.json({ success: true, data })
+            })
     })
     .post((req, res) => {
         // save new book to the database
