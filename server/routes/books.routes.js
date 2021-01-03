@@ -37,15 +37,22 @@ router
 
 
     });
-// router
-//     .route('/:id')
-//     .delete((req, res) => {
-//         // Delte book from the database
-//         console.log("delete route hit");
-//         const reqDel =  req.params.id
-//         console.log("params", reqDel);
-//         res.json({ success: true})
-//     })
+router
+    .route('/:id')
+    .delete((req, res) => {
+        // Delte book from the database
+        console.log("delete route hit");
+        const reqDel =  req.params.id
+        Book
+            .findByIdAndDelete(reqDel)
+            .then(data => {
+                console.log(data)
+                res.json({ success: true})
+            })
+            .catch(err => {
+                console.log("error deleting id", err)
+            })
+    })
 // * route
 
 module.exports = router;
