@@ -1,8 +1,9 @@
 import React from 'react';
+
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Homepage from './pages/Homepage';
 import Saved from './pages/Saved';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
   return (
