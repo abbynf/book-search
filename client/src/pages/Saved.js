@@ -6,6 +6,18 @@ class Saved extends Component {
 
     // component did mount hook that fetchs database for saved books
         // store in state
+    componentDidMount(){
+        async function fetchSavedBooks() {
+            try {
+                const response = await fetch('/api/books');
+                const data = await response.json();
+                console.log({ data })
+            } catch (err) {
+                console.log({ err })
+            }
+        }
+        fetchSavedBooks();
+    }
 
     render() {
         return (
