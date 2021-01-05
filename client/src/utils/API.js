@@ -4,7 +4,7 @@ import Format from './../utils/Format';
 // eslint-disable-next-line
 export default {
     searchTitle: function(title) {
-        const url = "https://www.googleapis.com/books/v1/volumes?q=" + title;
+        let url = "https://www.googleapis.com/books/v1/volumes?q=" + title;
         return axios.get(url)
     },
     saveTitle: function(volume) {
@@ -20,5 +20,10 @@ export default {
     },
     fetchSavedBooks: function() {
         return axios.get('/api/books')
+    },
+    deleteBook: function(id) {
+        console.log(id);
+        let url = '/api/books/' + id
+        return axios.delete(url)
     }
 };
