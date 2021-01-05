@@ -17,5 +17,8 @@ export default {
             image: info.imageLinks.thumbnail,
             link: rightLink
         })
+    },
+    fetchSavedBooks: function() {
+        return axios.get('/api/books')
     }
 };

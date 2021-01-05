@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
 import Header from './../components/Header';
+import API from './../utils/API';
 
 class Saved extends Component {
 
-    // state holds database results
+    constructor() {
+        super();
+        this.state = {
+            // state holds database results
+            savedTitles : []
+        }
+    }
 
     // component did mount hook that fetchs database for saved books
-        // store in state
     componentDidMount(){
-        // change function to util function
-        async function fetchSavedBooks() {
-            try {
-                const response = await fetch('/api/books');
-                const data = await response.json();
-                console.log({ data })
-            } catch (err) {
-                console.log({ err })
-            }
-        }
-        fetchSavedBooks();
+        API.fetchSavedBooks()
+        // store in state
+        .then(res => this.setState({savedTitles: res.data.data}))
     }
 
     render() {
@@ -26,7 +24,6 @@ class Saved extends Component {
             <div>
                 <Header />
                 <h2>Saved</h2>
-
                 {/* Component for saved books */}
             </div>
         )
