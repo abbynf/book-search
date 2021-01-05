@@ -9,7 +9,6 @@ function Format (id, title) {
         }
     };
 
-    console.log(formatTitle);
     const link = "http://books.google.com/books?id=" + id + "&dq=title:" + formatTitle + "&hl=&source=gbs_api";
     return link;
 };

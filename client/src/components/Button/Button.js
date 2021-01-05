@@ -9,9 +9,7 @@ function Button(props) {
         )
     } else {
         return (
-            <div>
-                <button>Save</button>
-            </div>
+                <button className="btn btn-success">Save</button>
         )
     }
 };

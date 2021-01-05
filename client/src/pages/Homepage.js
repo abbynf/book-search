@@ -17,7 +17,6 @@ class Homepage extends Component {
     handleInputChange = (event) => {
         const text = event.target.value;
 
-        console.log(this.state)
         // Updating the input's state
         this.setState({
             title: text
@@ -31,7 +30,6 @@ class Homepage extends Component {
         // store results in state
         .then(res => {
             this.setState({searchResults: res.data.items})
-            console.log(res);
         })
         .catch(err => console.log(err))
     }
@@ -44,7 +42,6 @@ class Homepage extends Component {
 
                     <div className="row">
 
-                        {/* Header component */}
                         <Header />
                     </div>
                     <div className="row">
@@ -69,10 +66,10 @@ class Homepage extends Component {
                     {/* Component for search results */}
                     {this.state.searchResults.map((data) => {
                         const info = data.volumeInfo
-                        console.log(info);
                         const rightLink = Format(data.id, info.title)
                         return (
                             <BookInfo 
+                                key={data.id}
                                 saved="false"
                                 image={info.imageLinks.thumbnail}
                                 title={info.title}
@@ -81,7 +78,6 @@ class Homepage extends Component {
                                 description={info.description}
                                 link={rightLink}
                                 />
-                            
                         )
                     })}
                 </div>
