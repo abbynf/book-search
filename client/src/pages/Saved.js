@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from './../components/Header';
+import BookInfo from './../components/BookInfo';
 import API from './../utils/API';
 
 class Saved extends Component {
@@ -23,8 +24,24 @@ class Saved extends Component {
         return (
             <div>
                 <Header />
+                <div className="container">
+
                 <h2>Saved</h2>
-                {/* Component for saved books */}
+                {this.state.savedTitles.map((volume) => {
+                    console.log(volume);
+                    return (
+                        <>
+                        <BookInfo image={volume.image}
+                            title={volume.title}
+                            author={volume.author}
+                            description={volume.description}
+                            />
+                        <button href={volume.link} className="btn btn-primary">View</button>
+                        <button className="btn btn-danger">Delete</button>
+                        </>
+                    )
+                })}
+                </div>
             </div>
         )
     }
