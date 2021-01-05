@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import BookInfo from './../components/BookInfo';
 import Header from './../components/Header';
 import API from './../utils/API';
+import Format from './../utils/Format';
 
 class Homepage extends Component {
 
@@ -9,13 +10,14 @@ class Homepage extends Component {
         // State to manage the search bar input
         title: "",
         // State to manage the search results
-        searchResults: {}
+        searchResults: []
     }
 
     // Store search bar text input in state
     handleInputChange = (event) => {
         const text = event.target.value;
 
+        console.log(this.state)
         // Updating the input's state
         this.setState({
             title: text
@@ -27,7 +29,10 @@ class Homepage extends Component {
         event.preventDefault();
         API.searchTitle(this.state.title)
         // store results in state
-        .then(res=> console.log(res))
+        .then(res => {
+            this.setState({searchResults: res.data.items})
+            console.log(res);
+        })
         .catch(err => console.log(err))
     }
 
@@ -43,16 +48,16 @@ class Homepage extends Component {
                         <Header />
                     </div>
                     <div className="row">
-                        <h2>Homepage</h2>
+                        <h2>Search</h2>
                     </div>
 
                     <form>
-                        <div className="row">
+                        <div className="row mt-4">
 
                             {/* Search bar */}
-                            <label htmlFor="title">Title:</label>
+                            <label htmlFor="title">Search for the title of the book:</label>
                         </div>
-                        <div className="row">
+                        <div className="row mb-5">
                             <input type="text" name="title" id="title" onChange={this.handleInputChange} />
 
                             {/* Search button */}
@@ -62,7 +67,23 @@ class Homepage extends Component {
                     </form>
 
                     {/* Component for search results */}
-                    <BookInfo saved="false"/>
+                    {this.state.searchResults.map((data) => {
+                        const info = data.volumeInfo
+                        console.log(info);
+                        const rightLink = Format(data.id, info.title)
+                        return (
+                            <BookInfo 
+                                saved="false"
+                                image={info.imageLinks.thumbnail}
+                                title={info.title}
+                                // future development, have all authors listed
+                                author={info.authors[0]}
+                                description={info.description}
+                                link={rightLink}
+                                />
+                            
+                        )
+                    })}
                 </div>
             </div>
         )
