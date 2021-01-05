@@ -27,11 +27,11 @@ class Homepage extends Component {
     handleSubmitClick = (event) => {
         event.preventDefault();
         API.searchTitle(this.state.title)
-        // store results in state
-        .then(res => {
-            this.setState({searchResults: res.data.items})
-        })
-        .catch(err => console.log(err))
+            // store results in state
+            .then(res => {
+                this.setState({ searchResults: res.data.items })
+            })
+            .catch(err => console.log(err))
     }
 
     handleSaveClick = (event) => {
@@ -39,7 +39,12 @@ class Homepage extends Component {
         const chosenVolume = this.state.searchResults.filter(result => result.id === event.target.value);
         console.log(chosenVolume);
         API.saveTitle(chosenVolume)
-        .then(res => console.log(res))
+            .then(res => {
+                if (res.status === 200){
+                    window.alert("saved!")
+                }
+            })
+            .catch(err => console.log(err))
     }
 
 
@@ -66,7 +71,7 @@ class Homepage extends Component {
                             <input type="text" name="title" id="title" onChange={this.handleInputChange} />
 
                             {/* Search button */}
-                            <input type="submit" value="Submit" onClick={this.handleSubmitClick}/>
+                            <input type="submit" value="Submit" onClick={this.handleSubmitClick} />
                         </div>
 
                     </form>
@@ -77,22 +82,22 @@ class Homepage extends Component {
                         const rightLink = Format(data.id, info.title)
                         return (
                             <>
-                            <BookInfo 
-                                key={data.id}
-                                image={info.imageLinks.thumbnail}
-                                title={info.title}
-                                // future development, have all authors listed
-                                author={info.authors[0]}
-                                description={info.description}
-                                link={rightLink}
+                                <BookInfo
+                                    key={data.id}
+                                    image={info.imageLinks.thumbnail}
+                                    title={info.title}
+                                    // future development, have all authors listed
+                                    author={info.authors[0]}
+                                    description={info.description}
+                                    link={rightLink}
                                 />
                                 <div className="row">
-                                <div className="col">
-                                    <a className="btn btn-primary" href={rightLink} role="button">View</a>
-                                    <button className="btn btn-success" onClick={this.handleSaveClick} value={data.id}>Save</button>
-                
+                                    <div className="col">
+                                        <a className="btn btn-primary" href={rightLink} role="button">View</a>
+                                        <button className="btn btn-success" onClick={this.handleSaveClick} value={data.id}>Save</button>
+
+                                    </div>
                                 </div>
-                            </div>
                             </>
                         )
                     })}
