@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from './../components/Header';
 
 class Saved extends Component {
 
@@ -23,8 +24,9 @@ class Saved extends Component {
     render() {
         return (
             <div>
-                <h1>Saved</h1>
-                {/* Header component */}
+                <Header />
+                <h2>Saved</h2>
+
                 {/* Component for saved books */}
             </div>
         )

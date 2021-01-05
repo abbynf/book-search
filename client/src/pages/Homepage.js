@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BookInfo from './../components/BookInfo';
+import Header from './../components/Header';
 import API from './../utils/API';
 
 class Homepage extends Component {
@@ -38,8 +39,11 @@ class Homepage extends Component {
 
                     <div className="row">
 
-                        <h1>Homepage</h1>
                         {/* Header component */}
+                        <Header />
+                    </div>
+                    <div className="row">
+                        <h2>Homepage</h2>
                     </div>
 
                     <form>
