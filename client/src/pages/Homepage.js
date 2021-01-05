@@ -34,6 +34,11 @@ class Homepage extends Component {
         .catch(err => console.log(err))
     }
 
+    handleSaveClick = (event) => {
+        event.preventDefault();
+        const chosenVolume = this.state.searchResults.filter(result => result.id === event.target.value);
+    }
+
 
     render() {
         return (
@@ -68,9 +73,9 @@ class Homepage extends Component {
                         const info = data.volumeInfo
                         const rightLink = Format(data.id, info.title)
                         return (
+                            <>
                             <BookInfo 
                                 key={data.id}
-                                saved="false"
                                 image={info.imageLinks.thumbnail}
                                 title={info.title}
                                 // future development, have all authors listed
@@ -78,6 +83,14 @@ class Homepage extends Component {
                                 description={info.description}
                                 link={rightLink}
                                 />
+                                <div className="row">
+                                <div className="col">
+                                    <a className="btn btn-primary" href={rightLink} role="button">View</a>
+                                    <button className="btn btn-success" onClick={this.handleSaveClick} value={data.id}>Save</button>
+                
+                                </div>
+                            </div>
+                            </>
                         )
                     })}
                 </div>

@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from './../Button';
 
 function BookInfo(props) {
 
@@ -23,13 +22,7 @@ function BookInfo(props) {
                     <p>{props.description}</p>
                 </div>
             </div>
-            <div className="row">
-                <div className="col">
-                    <a className="btn btn-primary" href={props.link} role="button">View</a>
-                    <Button saved={props.saved} />
 
-                </div>
-            </div>
 
         </>
     )
