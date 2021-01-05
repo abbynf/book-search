@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import BookInfo from './../components/BookInfo';
 import API from './../utils/API';
 
 class Homepage extends Component {
@@ -10,15 +11,9 @@ class Homepage extends Component {
         searchResults: {}
     }
 
-
-
-
-
     // Store search bar text input in state
     handleInputChange = (event) => {
         const text = event.target.value;
-        console.log(this.state);
-
 
         // Updating the input's state
         this.setState({
@@ -26,15 +21,15 @@ class Homepage extends Component {
         });
     }
 
+    // Function to fetch API results on click
     handleSubmitClick = (event) => {
         event.preventDefault();
         API.searchTitle(this.state.title)
+        // store results in state
         .then(res=> console.log(res))
         .catch(err => console.log(err))
     }
 
-    // Function to fetch API results on click
-    // store results in state
 
     render() {
         return (
@@ -63,6 +58,7 @@ class Homepage extends Component {
                     </form>
 
                     {/* Component for search results */}
+                    <BookInfo saved="false"/>
                 </div>
             </div>
         )
