@@ -37,6 +37,9 @@ class Homepage extends Component {
     handleSaveClick = (event) => {
         event.preventDefault();
         const chosenVolume = this.state.searchResults.filter(result => result.id === event.target.value);
+        console.log(chosenVolume);
+        API.saveTitle(chosenVolume)
+        .then(res => console.log(res))
     }
 
 
