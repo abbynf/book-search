@@ -9,34 +9,34 @@ class Saved extends Component {
         super();
         this.state = {
             // state holds database results
-            savedTitles : []
+            savedTitles: []
         }
     }
 
     // component did mount hook that fetchs database for saved books
-    componentDidMount(){
+    componentDidMount() {
         API.fetchSavedBooks()
-        // store in state
-        .then(res => this.setState({savedTitles: res.data.data}))
+            // store in state
+            .then(res => this.setState({ savedTitles: res.data.data }))
     }
 
     handleDeleteClick = (event) => {
         event.preventDefault();
         console.log(event.target.value)
         API.deleteBook(event.target.value)
-        .then(res => {
-            if (res.status === 200){
-                window.alert("Successfully deleted!")
-            }
-            const removeId = this.state.savedTitles.filter((volume) => volume._id !== event.target.value);
-            this.setState({savedTitles: removeId})
-        })
+            .then(res => {
+                if (res.status === 200) {
+                    window.alert("Successfully deleted!")
+                }
+                const removeId = this.state.savedTitles.filter((volume) => volume._id !== event.target.value);
+                this.setState({ savedTitles: removeId })
+            })
     }
 
     listAuthors = (authorArray) => {
-        if (authorArray){
+        if (authorArray) {
             let authorString = authorArray[0];
-            for (let i=1; i< authorArray.length; i++){
+            for (let i = 1; i < authorArray.length; i++) {
                 authorString = authorString + ", " + authorArray[i]
             }
             return authorString;
@@ -46,32 +46,46 @@ class Saved extends Component {
     }
 
     render() {
-        return (
-            <div>
-                <Header />
-                <div className="container mb-5">
+        if (this.state.savedTitles.length === 0) {
+            return (
+                <div>
+                    <Header />
+                    <div className="container mb=5">
 
-                <h2>Saved</h2>
-                {this.state.savedTitles.map((volume) => {
-                    const authorsInString = this.listAuthors(volume.author)
-                    console.log(volume);
-                    return (
-                        <div key={volume._id}>
-                        <BookInfo 
-                            key={volume._id + "bookinfo"}
-                            image={volume.image}
-                            title={volume.title}
-                            author={authorsInString}
-                            description={volume.description}
-                            />
-                        <button href={volume.link} className="btn btn-primary">View</button>
-                        <button className="btn btn-danger" onClick={this.handleDeleteClick} value={volume._id}>Delete</button>
-                        </div>
-                    )
-                })}
+                        <h2>Saved</h2>
+                        <div>No books saved.</div>
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        } else {
+
+            return (
+                <div>
+                    <Header />
+                    <div className="container mb-5">
+
+                        <h2>Saved</h2>
+                        {this.state.savedTitles.map((volume) => {
+                            const authorsInString = this.listAuthors(volume.author)
+                            console.log(volume);
+                            return (
+                                <div key={volume._id}>
+                                    <BookInfo
+                                        key={volume._id + "bookinfo"}
+                                        image={volume.image}
+                                        title={volume.title}
+                                        author={authorsInString}
+                                        description={volume.description}
+                                    />
+                                    <button href={volume.link} className="btn btn-primary">View</button>
+                                    <button className="btn btn-danger" onClick={this.handleDeleteClick} value={volume._id}>Delete</button>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
+            )
+        }
     }
 };
 
