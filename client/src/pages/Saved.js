@@ -45,15 +45,17 @@ class Saved extends Component {
                     const authorsInString = Format.listAuthors(volume.author)
                     console.log(volume);
                     return (
-                        <>
-                        <BookInfo image={volume.image}
+                        <div key={volume._id}>
+                        <BookInfo 
+                            key={volume._id + "bookinfo"}
+                            image={volume.image}
                             title={volume.title}
                             author={authorsInString}
                             description={volume.description}
                             />
                         <button href={volume.link} className="btn btn-primary">View</button>
                         <button className="btn btn-danger" onClick={this.handleDeleteClick} value={volume._id}>Delete</button>
-                        </>
+                        </div>
                     )
                 })}
                 </div>

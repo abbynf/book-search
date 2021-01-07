@@ -40,8 +40,8 @@ class Homepage extends Component {
         console.log(chosenVolume);
         API.saveTitle(chosenVolume)
             .then(res => {
-                if (res.status === 200){
-                    window.alert("saved!")
+                if (res.status === 200) {
+                    window.alert("Successfully saved!")
                 }
             })
             .catch(err => console.log(err))
@@ -81,26 +81,24 @@ class Homepage extends Component {
                         const info = data.volumeInfo
                         const rightLink = Format.formatLink(data.id, info.title)
                         const authors = Format.listAuthors(info.authors);
-                        console.log(authors);
                         return (
-                            <>
-                                <BookInfo
-                                    key={data.id}
+                            <div key={data.id}>
+
+                                <BookInfo key={data.id}
                                     image={info.imageLinks.thumbnail}
                                     title={info.title}
-                                    // future development, have all authors listed
                                     author={authors}
                                     description={info.description}
                                     link={rightLink}
                                 />
-                                <div className="row">
-                                    <div className="col">
-                                        <a className="btn btn-primary" href={rightLink} role="button">View</a>
-                                        <button className="btn btn-success" onClick={this.handleSaveClick} value={data.id}>Save</button>
-
+                                <div className="row" key={data.id + "div1"}>
+                                    <div className="col" key={data.id + "div2"}>
+                                    <a className="btn btn-primary" href={rightLink} role="button" key={data.id+ "view1"}>View</a>
+                                    <button className="btn btn-success" onClick={this.handleSaveClick} value={data.id} key={data.id + "button"}>Save</button>
                                     </div>
                                 </div>
-                            </>
+                            </div>
+
                         )
                     })}
                 </div>
