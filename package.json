@@ -4,8 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "nodemon ./server/server.js"
+    "start": "node server/server.js",
+    "start:server": "nodemon server/server.js",
+    "start:client": "cd client && npm start",
+    "dev": "concurrently \"npm run start:server\" \"npm run start:client\"",
+    "install": "cd client && npm",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -19,6 +24,7 @@
   },
   "homepage": "https://github.com/abbynf/book-search#readme",
   "dependencies": {
+    "concurrently": "^5.3.0",
     "express": "^4.17.1",
     "mongoose": "^5.11.9"
   },
