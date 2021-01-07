@@ -9,10 +9,10 @@ export default {
     },
     saveTitle: function(volume) {
         const info = volume[0].volumeInfo;
-        const rightLink = Format(volume[0].id, info.title)
+        const rightLink = Format.formatLink(volume[0].id, info.title)
         return axios.post('/api/books', {
             title: info.title,
-            author: info.authors[0],
+            author: info.authors,
             description: info.description,
             image: info.imageLinks.thumbnail,
             link: rightLink

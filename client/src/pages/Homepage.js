@@ -79,7 +79,9 @@ class Homepage extends Component {
                     {/* Component for search results */}
                     {this.state.searchResults.map((data) => {
                         const info = data.volumeInfo
-                        const rightLink = Format(data.id, info.title)
+                        const rightLink = Format.formatLink(data.id, info.title)
+                        const authors = Format.listAuthors(info.authors);
+                        console.log(authors);
                         return (
                             <>
                                 <BookInfo
@@ -87,7 +89,7 @@ class Homepage extends Component {
                                     image={info.imageLinks.thumbnail}
                                     title={info.title}
                                     // future development, have all authors listed
-                                    author={info.authors[0]}
+                                    author={authors}
                                     description={info.description}
                                     link={rightLink}
                                 />

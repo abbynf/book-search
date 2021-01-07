@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './../components/Header';
 import BookInfo from './../components/BookInfo';
 import API from './../utils/API';
+import Format from './../utils/Format';
 
 class Saved extends Component {
 
@@ -41,12 +42,13 @@ class Saved extends Component {
 
                 <h2>Saved</h2>
                 {this.state.savedTitles.map((volume) => {
+                    const authorsInString = Format.listAuthors(volume.author)
                     console.log(volume);
                     return (
                         <>
                         <BookInfo image={volume.image}
                             title={volume.title}
-                            author={volume.author}
+                            author={authorsInString}
                             description={volume.description}
                             />
                         <button href={volume.link} className="btn btn-primary">View</button>
