@@ -21,7 +21,6 @@ export default {
         return axios.get('/api/books')
     },
     deleteBook: function(id) {
-        console.log(id);
         let url = '/api/books/' + id
         return axios.delete(url)
     }

@@ -22,7 +22,6 @@ class Saved extends Component {
 
     handleDeleteClick = (event) => {
         event.preventDefault();
-        console.log(event.target.value)
         API.deleteBook(event.target.value)
             .then(res => {
                 if (res.status === 200) {
@@ -67,7 +66,6 @@ class Saved extends Component {
                         <h2>Saved</h2>
                         {this.state.savedTitles.map((volume) => {
                             const authorsInString = this.listAuthors(volume.author)
-                            console.log(volume);
                             return (
                                 <div key={volume._id}>
                                     <BookInfo
