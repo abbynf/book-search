@@ -47,11 +47,15 @@ class Homepage extends Component {
     }
 
     listAuthors = (authorArray) => {
-        let authorString = authorArray[0];
-        for (let i=1; i< authorArray.length; i++){
-            authorString = authorString + ", " + authorArray[i]
+        if (authorArray){
+            let authorString = authorArray[0];
+            for (let i=1; i< authorArray.length; i++){
+                authorString = authorString + ", " + authorArray[i]
+            }
+            return authorString;
+        } else {
+            return "Anonymous"
         }
-        return authorString;
     }
 
 

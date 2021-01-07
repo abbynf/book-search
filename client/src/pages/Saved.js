@@ -34,19 +34,22 @@ class Saved extends Component {
     }
 
     listAuthors = (authorArray) => {
-        let authorString = authorArray[0];
-        for (let i=1; i< authorArray.length; i++){
-            authorString = authorString + ", " + authorArray[i]
+        if (authorArray){
+            let authorString = authorArray[0];
+            for (let i=1; i< authorArray.length; i++){
+                authorString = authorString + ", " + authorArray[i]
+            }
+            return authorString;
+        } else {
+            return "Anonymous"
         }
-        console.log(authorString);
-        return authorString;
     }
 
     render() {
         return (
             <div>
                 <Header />
-                <div className="container">
+                <div className="container mb-5">
 
                 <h2>Saved</h2>
                 {this.state.savedTitles.map((volume) => {
