@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Header from './../components/Header';
 import BookInfo from './../components/BookInfo';
 import API from './../utils/API';
-import Format from './../utils/Format';
 
 class Saved extends Component {
 
@@ -34,6 +33,15 @@ class Saved extends Component {
         })
     }
 
+    listAuthors = (authorArray) => {
+        let authorString = authorArray[0];
+        for (let i=1; i< authorArray.length; i++){
+            authorString = authorString + ", " + authorArray[i]
+        }
+        console.log(authorString);
+        return authorString;
+    }
+
     render() {
         return (
             <div>
@@ -42,7 +50,7 @@ class Saved extends Component {
 
                 <h2>Saved</h2>
                 {this.state.savedTitles.map((volume) => {
-                    const authorsInString = Format.listAuthors(volume.author)
+                    const authorsInString = this.listAuthors(volume.author)
                     console.log(volume);
                     return (
                         <div key={volume._id}>

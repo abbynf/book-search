@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import BookInfo from './../components/BookInfo';
 import Header from './../components/Header';
 import API from './../utils/API';
-import Format from './../utils/Format';
 
 class Homepage extends Component {
 
@@ -47,6 +46,14 @@ class Homepage extends Component {
             .catch(err => console.log(err))
     }
 
+    listAuthors = (authorArray) => {
+        let authorString = authorArray[0];
+        for (let i=1; i< authorArray.length; i++){
+            authorString = authorString + ", " + authorArray[i]
+        }
+        return authorString;
+    }
+
 
     render() {
         return (
@@ -78,9 +85,9 @@ class Homepage extends Component {
 
                     {/* Component for search results */}
                     {this.state.searchResults.map((data) => {
+                        console.log(data)
                         const info = data.volumeInfo
-                        const rightLink = Format.formatLink(data.id, info.title)
-                        const authors = Format.listAuthors(info.authors);
+                        const authors = this.listAuthors(info.authors);
                         return (
                             <div key={data.id}>
 
@@ -89,11 +96,10 @@ class Homepage extends Component {
                                     title={info.title}
                                     author={authors}
                                     description={info.description}
-                                    link={rightLink}
                                 />
                                 <div className="row" key={data.id + "div1"}>
                                     <div className="col" key={data.id + "div2"}>
-                                    <a className="btn btn-primary" href={rightLink} role="button" key={data.id+ "view1"}>View</a>
+                                    <a className="btn btn-primary" href={info.infoLink} role="button" key={data.id+ "view1"}>View</a>
                                     <button className="btn btn-success" onClick={this.handleSaveClick} value={data.id} key={data.id + "button"}>Save</button>
                                     </div>
                                 </div>

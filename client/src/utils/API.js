@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Format from './../utils/Format';
 
 // eslint-disable-next-line
 export default {
@@ -9,7 +8,7 @@ export default {
     },
     saveTitle: function(volume) {
         const info = volume[0].volumeInfo;
-        const rightLink = Format.formatLink(volume[0].id, info.title)
+        const rightLink = info.infoLink;
         return axios.post('/api/books', {
             title: info.title,
             author: info.authors,
